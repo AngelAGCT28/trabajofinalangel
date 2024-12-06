@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 4 - Codigo QR</title>
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Formulario de Contacto -->
+<section id="contact-form">
+    <h2>Formulario de Contacto</h2>
+    <form id="contactForm">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="message">Mensaje:</label>
+        <textarea id="message" name="message" required></textarea><br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h3>Generar Código QR</h3>
+    <div id="qrcode"></div>
+</section>
+
+<!-- Incluir librería QRCode.js -->
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Evitar que el formulario se envíe
+
+        // Obtener los valores del formulario
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var message = document.getElementById("message").value;
+
+        // Crear una cadena con los datos del formulario
+        var qrData = `Nombre: ${name}\nCorreo: ${email}\nMensaje: ${message}`;
+
+        // Generar el código QR con los datos del formulario
+        var qrCode = new QRCode(document.getElementById("qrcode"), {
+            text: qrData,
+            width: 128,
+            height: 128
+        });
+    });
+</script>
